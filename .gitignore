@@ -38,3 +38,8 @@ tensorboard/
 *.tflite
 models/*
 !models/.gitkeep
+
+# Submitted model artifacts
+!models/best.pt
+!models/best_fp16.onnx
+!models/best_fp32.onnx

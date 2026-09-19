@@ -1,0 +1,2 @@
+# Dependencies for Artikate CV / ML Engineer Assignment
+# Minimal initialization stage - specific requirements to be finalized during implementation.

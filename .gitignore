@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Generated training runs and logs
+runs/
+wandb/
+tensorboard/
+*.log
+
+# PDF files
+*.pdf
+
+# Large model artifacts
+*.pt
+*.onnx
+*.engine
+*.tflite
+models/*
+!models/.gitkeep

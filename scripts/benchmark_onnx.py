@@ -294,25 +294,27 @@ def main():
 
     # Compare Predictions on sample validation image (PyTorch vs FP32 ONNX and PyTorch vs FP16 ONNX)
     val_img_dir = REPO_ROOT / "data" / "val" / "images"
-    sample_images = sorted(list(val_img_dir.glob("*.jpg")) + list(val_img_dir.glob("*.jpeg")))
+    sample_images = sorted([f for f in val_img_dir.glob("*") if f.suffix.lower() in ('.jpg', '.jpeg', '.png')])
     if sample_images and pt_path.exists():
         from ultralytics import YOLO
         pt_finder = YOLO(str(pt_path))
-        sample_img = None
-        sample_det_count = 0
+        selected_img = None
+        selected_det_count = 0
 
         for img_p in sample_images:
             res = pt_finder.predict(str(img_p), verbose=False)[0]
             if len(res.boxes) > 0:
-                sample_img = img_p
-                sample_det_count = len(res.boxes)
+                selected_img = img_p
+                selected_det_count = len(res.boxes)
                 break
 
-        if sample_img is None:
-            sample_img = sample_images[0]
+        if selected_img is None:
+            selected_img = sample_images[0]
+            res_default = pt_finder.predict(str(selected_img), verbose=False)[0]
+            selected_det_count = len(res_default.boxes)
 
-        print(f"\nSelected image for parity check: {sample_img.name} (PyTorch detections: {sample_det_count})")
-        print(f"--- Prediction Parity Comparison on Sample Image: {sample_img.name} ---")
+        print(f"\nSelected validation image for parity check: {selected_img.name} (PyTorch detections: {selected_det_count})")
+        print(f"--- Prediction Parity Comparison on Sample Image: {selected_img.name} ---")
 
         for onnx_label, onnx_p in [("PyTorch vs FP32 ONNX", fp32_path), ("PyTorch vs FP16 ONNX", fp16_path)]:
             if not onnx_p.exists():
@@ -320,7 +322,7 @@ def main():
                 continue
 
             print(f"\n  Comparison: {onnx_label}")
-            comp = compare_predictions(pt_path, onnx_p, sample_img)
+            comp = compare_predictions(pt_path, onnx_p, selected_img)
             if "error" not in comp:
                 print(f"    Status                   : {comp['note']}")
                 print(f"    PyTorch Detections       : {comp['num_pt']}")

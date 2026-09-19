@@ -8,6 +8,8 @@ venv/
 env/
 .venv/
 ENV/
+.annotate-env/
+
 
 # IDE / Editor files
 .vscode/

@@ -1,2 +1,13 @@
-# Dependencies for Google Colab and local training
+# Core ML Frameworks
 ultralytics
+torch
+
+# Core Numerical & Data Libraries
+numpy
+pandas
+
+# ONNX Export & Runtime
+onnx
+onnxruntime
+# Note: For GPU-accelerated ONNX Runtime execution on CUDA hardware,
+# replace 'onnxruntime' with 'onnxruntime-gpu' (e.g., onnxruntime-gpu).

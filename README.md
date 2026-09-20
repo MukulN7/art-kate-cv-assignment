@@ -1,5 +1,11 @@
 # Artikate CV / ML Engineer Assignment
 
+## Video Walkthrough
+
+[View the 6–8 minute submission walkthrough](https://drive.google.com/file/d/13fYavDQdnA3LUfrGoHqBvEU3lzmvC_cP/view?usp=sharing)
+
+---
+
 ## 1. Overview
 This project implements an end-to-end computer vision pipeline for two-class object detection targeting **bottle** (Class `0`) and **cup** (Class `1`). Built using the **YOLO11n** lightweight architecture, the project covers dataset preparation, manual YOLO bounding box annotation, model training, ONNX model export, FP16 precision reduction, model benchmarking, and failure mode analysis.
 
